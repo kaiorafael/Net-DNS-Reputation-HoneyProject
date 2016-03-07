@@ -1,0 +1,6 @@
+Changes
+Makefile.PL
+MANIFEST
+README
+t/Net-DNS-Reputation-HoneyProject.t
+lib/Net/DNS/Reputation/HoneyProject.pm
