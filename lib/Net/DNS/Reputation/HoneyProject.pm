@@ -106,9 +106,15 @@ sub get_response_long {
 	#http://www.projecthoneypot.org/threat_info.php
 	my $treat = $self->get_treat_score($ip_array[2]); #3rd octet
 	
+	# This is a bug fix when answers come with 'number_space_)'
+	# Very hard to reproduce!
+	# Remove any white space and etc.
+	if ( length($ip_array[3]) >= 2 ) { $ip_array[3]=~s/\ .*//g; }
 	my $user_type = $self->get_visitor_type($ip_array[3]); #4th octet
 
-	my $long_response=$rr[-1] . "\t" . $days . "\t" . $treat . "\t" . $user_type;
+	my $ip=$ip_array[0].".".$ip_array[1].".".$ip_array[2].".".$ip_array[3];
+
+	my $long_response=$ip . "\t" . $days . "\t" . $treat . "\t" . $user_type;
 
 	return $long_response;
 }
